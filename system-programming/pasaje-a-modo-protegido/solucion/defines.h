@@ -68,7 +68,7 @@
 
 /* COMPLETAR - Tamaños de segmentos */ 
 #define FLAT_SEGM_SIZE   0x33100000
-//#define VIDEO_SEGM_SIZE  ??
+#define VIDEO_SEGM_SIZE  0x1F40
 
 
 /* Direcciones de memoria */

@@ -97,6 +97,22 @@ gdt_entry_t gdt[GDT_COUNT] = {
             .g = 0x01,
             .base_31_24 = 0x00,
         },
+    [GDT_IDX_VIDEO] = 
+        {
+        	.limit_15_0 = GDT_LIMIT_LOW(GDT_LIMIT_4KIB(VIDEO_SEGM_SIZE)),
+            .base_15_0 = 0x0000,
+            .base_23_16 = 0x00,
+            .type = DESC_TYPE_READ_WRITE,
+            .s = DESC_CODE_DATA,
+            .dpl = 0x00,
+            .p = 0x01,
+            .limit_19_16 = GDT_LIMIT_HIGH(GDT_LIMIT_4KIB(VIDEO_SEGM_SIZE)),
+            .avl = 0x0,
+            .l = 0x0,
+            .db = 0x1,
+            .g = 0x01,
+            .base_31_24 = 0x00,
+        },
 
     /* Completar la GDT: 
       Es conveniente completar antes las constantes definidas en defines.h y valerse
