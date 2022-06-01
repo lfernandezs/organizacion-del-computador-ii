@@ -1,0 +1,17 @@
+\begin{enumerate}
+\item Dos niveles, kernel (0) y usuarie (1)
+\item Se le aplica una función a la dirección lógica, que devuelve la física: \\
+  %TODO: Introducción 46
+\item \begin{itemize}
+  \item[D:] \texttt{Dirty}, marca si se escribió en la página
+  \item[A:] \texttt{Accessed}, marca si se escribió/leyó la página
+  \item[PCD:] \texttt{Page cache disabled}, determina si la página es cacheada
+  \item[PWT:] \texttt{Page write-through}, determina el método de caching (set se escribe al cache y a la memoria, unset se escribe al cache hasta liberarlo)
+  \item[U/S:] \texttt{User/System}, determina el nivel de privilegio necesario para acceder a esta pagina
+  \item[R/W:] \texttt{Read/Write}, determina si esta página es sólo para leer o si se puede escribir
+  \item[P:] \texttt{Present}, indica si la página está cargada en memoria
+  \end{itemize}
+\item Se necesita 1 tabla del directorio y 5 páginas de esa tabla (1 su pd, 1 su pt, 2 del código, y 1 del stack)
+\item
+\item El TLB es una especie de caché que guarda las ultimas traducciones de virtual a fisico, para ahorrar tiempo si se accede a una misma pagina muchas veces. Hay que flushearlo porque si cambiamos como traducimos virtuales, va a mantener traducciones viejas.
+\end{enumerate}
