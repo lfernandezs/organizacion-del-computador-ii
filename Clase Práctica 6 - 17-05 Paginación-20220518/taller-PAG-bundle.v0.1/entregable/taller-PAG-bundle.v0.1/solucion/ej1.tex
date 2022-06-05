@@ -1,0 +1,23 @@
+\begin{enumerate}
+\item El modo real existe por legacy, permite operar con las limitaciones del 8086 (16-bits, 1MB de memoria, es inseguro, acceso a todas las instrucciones, etc.). La computadora arranca en este modo. \\
+  Mientras que el modo protegido es el usado normalmente, tiene hasta 4GB de memoria disponible, 4 niveles de protección, y niveles de privilegios.
+\item Pasamos a modo protegido porque: Permite hacer programas más grandes, y manejar los privilegios de los programas (p.e. evitar que cualquiera lean cualquier pedazo de memoria). \\
+  Sí podríamos, de hecho los sistemas operativos del 8086 trabajaban en modo rea.
+\item La GDT es una tabla que lleva registro de los segmentos definidos. Los segment descriptors estan formados de diferentes partes: \begin{itemize}
+  \item Base address: es la posición en memoria del byte 0 de este segmento.
+  \item Segment limit: es la última posición indexable dentro del segmento.
+  \item Type: Marca para qé va a ser usado el segmento %TODO
+  \item S: 1 si va a ser usado para código o datos, 0: si va a ser usado por el sistema
+  \item DPL: Marca el nivel de privilegio necesario para acceder a este segmento
+  \item P: Marca si el segmento está presente o no en la computadora, si se indexa a un segmento no-presente salta una excepción (discos externos)
+  \item D/B: 0 el segmento es de 16-bits, 1 el segmento es de 32-bits %TODO: No 64?
+  \item G: 0: TrueLimit = (Limit + 1), 1: TrueLimit = (Limit + 1)*4KB
+  \item L: En modo IA-32e se usa para marcar si las instrucciones en este segmento usan 64-bits o 32-bits.
+  \item El bit 20 está libre para el sistema.
+  \end{itemize}
+\item 0b1010 %TODO conforming, accessed
+\item \begin{itemize}
+  \item[a:] Base0: 0000 0000, G: 1, D/B: , L: , Limit0:, P:, DPL:, S:, Type:1010, Base1:0000 0000, Base2:0000 0000 0000 0000, Limit1:\\
+    Final: 0b0000 0000
+  \end{itemize}
+\end{enumerate}
