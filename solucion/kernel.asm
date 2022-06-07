@@ -22,6 +22,7 @@ extern test_copy_page
 extern mmu_init_task_dir
 
 extern tss_init
+extern sched_init
 
 ; COMPLETAR - Definan correctamente estas constantes cuando las necesiten
 %define CS_RING_0_SEL 0x0008
@@ -119,19 +120,15 @@ modo_protegido:
     or eax, 0x80000000
     mov cr0, eax ; A: Paging := 1, el resto como estaba
 
-xchg bx, bx
-
     ; Inicializo las TSS en la GDT
     call tss_init
 
-xchg bx, bx
+    call sched_init
 
     ; Cargo la tarea inicial
     mov ax, TSS_RING_0_SEL
     LTR ax
     
-xchg bx, bx
-
     ; Saltamos a idle
     JMP TSS_RING_IDL_SEL:0
 

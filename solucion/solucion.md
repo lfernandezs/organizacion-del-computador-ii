@@ -61,3 +61,26 @@ El scheduler administra la  ejecución de las tareas. Utiliza una política para
 6. .
 a) `tss_dgt_entry_for_task` toma la tss de una tarea y devuelve su descriptor correspondiente.
 b) 
+
+11. .
+```assembly
+global _isr32
+_isr32:
+    pushad	; Pushea todos los registros de propósito 
+            ; general.
+    call pic_finish1 ; ?
+    call sched_next_task ; Obtiene la siguiente tarea.
+    str cx	; Store Task Register: guarda el selector de
+    		; segmento del task register en cx.
+    cmp ax, cx
+    je .fin	; Si ax == cx, salta a .fin.
+    mov word [sched_task_selector], ax	; El nuevo selector 
+    									; de tarea se 
+    									; encuentra ahora en 
+    									; ax
+    jmp far [sched_task_offset]	; Se salta al código de la 
+    							; tarea
+    .fin:
+    popad
+    iret
+```
